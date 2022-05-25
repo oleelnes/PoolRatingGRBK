@@ -2,25 +2,27 @@ package biljard.grbk.elnes.rating.player;
 
 import java.time.LocalDate;
 
-public class PlayerGroupE extends Rating {
+public class RatingGroupB extends Rating {
 
 
-  public PlayerGroupE(int rating, LocalDate date) {
+  public RatingGroupB(int rating, LocalDate date) {
     super(rating, date);
   }
 
   @Override
   public int getRatingChange(boolean win, Rating opponentRating) {
-    if (win) {
+    if (win){
       return switch (opponentRating.getGroup()) {
-        case A -> 3;
-        case B, C, D, E -> 2;
+        case A, B -> 2;
+        case C, D, E -> 1;
       };
-    } else {
+    }
+    else {
       return switch (opponentRating.getGroup()) {
-        case A, B, C -> -1;
-        case D, E -> -2;
+        case A, B -> -1;
+        case C, D, E -> -2;
       };
     }
   }
+
 }
