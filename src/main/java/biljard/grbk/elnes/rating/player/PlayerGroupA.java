@@ -2,9 +2,8 @@ package biljard.grbk.elnes.rating.player;
 
 public class PlayerGroupA extends Player {
 
-  public PlayerGroupA(String firstName, String lastName, Rating rating,
-                      PlayerRatingHistory playerRatingHistory) {
-    super(firstName, lastName, rating, playerRatingHistory);
+  public PlayerGroupA(String firstName, String lastName, Rating rating) {
+    super(firstName, lastName, rating);
   }
 
   @Override
