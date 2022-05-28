@@ -3,10 +3,12 @@ package biljard.grbk.elnes.rating.player;
 import java.time.LocalDate;
 
 public class RatingGroupA extends Rating {
+  private Player.PlayerGroup group;
 
 
   public RatingGroupA(int rating, LocalDate date) {
     super(rating, date);
+    group = Player.PlayerGroup.A;
   }
 
   @Override
@@ -19,5 +21,15 @@ public class RatingGroupA extends Rating {
         case E -> -3;
       };
     }
+  }
+
+  @Override
+  public String getType() {
+    return "Group A";
+  }
+
+  @Override
+  public Player.PlayerGroup getGroup() {
+    return group;
   }
 }

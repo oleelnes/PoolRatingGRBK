@@ -5,6 +5,7 @@ public abstract class Player {
   private String lastName;
   private Rating rating;
   private String cuescoreID;
+  private PlayerGroup group;
 
   /**
    * Constructor for the class Player.
@@ -16,11 +17,44 @@ public abstract class Player {
   public Player(String firstName, String lastName, Rating rating) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.rating = rating;
+    this.group = selectGroup(rating.getRating());
+    this.rating = RatingFactory.createRatingInstance(this.group, rating.getRating());
+    System.out.println("of type: " );
+  }
+
+  /**
+   * The different player groups a player can inhabit, depending on their
+   * rating.
+   */
+  public enum PlayerGroup {
+    A,
+    B,
+    C,
+    D,
+    E;
+  }
+
+  /**
+   * Method that returns the rating group a player belongs to depending
+   * on their rating.
+   *
+   * @param ratingNumber  The player's rating number.
+   * @return              The group with which the player belongs.
+   */
+  public PlayerGroup selectGroup(int ratingNumber){
+    if (ratingNumber < 40) return PlayerGroup.E;
+    else if (ratingNumber < 60) return PlayerGroup.D;
+    else if (ratingNumber < 90) return PlayerGroup.C;
+    else if (ratingNumber < 115) return PlayerGroup.B;
+    return PlayerGroup.A;
   }
 
   public Rating getRating() {
     return rating;
+  }
+
+  public PlayerGroup getGroup() {
+    return group;
   }
 
 
