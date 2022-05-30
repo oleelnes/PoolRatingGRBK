@@ -1,4 +1,6 @@
-package biljard.grbk.elnes.rating.player;
+package biljard.grbk.elnes.rating.rating;
+
+import biljard.grbk.elnes.rating.player.Player;
 
 import java.time.LocalDate;
 
@@ -17,7 +19,6 @@ public abstract class Rating {
     this.rating = rating;
     this.date = date;
     this.initialDate = date;
-    //this.group = selectGroup(getRating());
   }
 
 
@@ -29,7 +30,7 @@ public abstract class Rating {
    * @param opponentRating  The opponentRating.
    */
   public void changeRating(boolean win, Rating opponentRating) {
-    setRating(getRating() + getRatingChange(win, opponentRating));
+    setRating(getRating() + getRatingChange(win, opponentRating), LocalDate.now());
     //group = selectGroup(getRating());
     date = LocalDate.now();
   }
@@ -39,24 +40,26 @@ public abstract class Rating {
     return rating;
   }
 
-  public void setRating(int rating) {
+  public void setRating(int rating, LocalDate date) {
     this.rating = rating;
+    this.date = date;
   }
 
   public LocalDate getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
-    this.date = date;
+  public LocalDate getInitialDate() {
+    return initialDate;
   }
+
 
   /**
    * Method that returns the change in rating as a result of data fed.
    *
-   * @param win       Whether the player won.
-   * @param opponentRating  The opponent.
-   * @return          The change in rating as a result of data fed.
+   * @param win              Whether the player won.
+   * @param opponentRating   The opponent.
+   * @return                 The change in rating as a result of data fed.
    */
   public abstract int getRatingChange(boolean win, Rating opponentRating);
 

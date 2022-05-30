@@ -1,6 +1,9 @@
 package biljard.grbk.elnes.rating.player;
 
-public abstract class Player {
+import biljard.grbk.elnes.rating.rating.Rating;
+import biljard.grbk.elnes.rating.rating.RatingFactory;
+
+public class Player {
   private String firstName;
   private String lastName;
   private Rating rating;
@@ -57,5 +60,8 @@ public abstract class Player {
     return group;
   }
 
+  public void changeRating(){
+
+  }
 
 }

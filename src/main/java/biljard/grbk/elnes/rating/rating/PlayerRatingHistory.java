@@ -1,6 +1,7 @@
-package biljard.grbk.elnes.rating.player;
+package biljard.grbk.elnes.rating.rating;
 
-import java.time.LocalDate;
+import biljard.grbk.elnes.rating.player.Player;
+
 import java.util.List;
 
 public class PlayerRatingHistory {

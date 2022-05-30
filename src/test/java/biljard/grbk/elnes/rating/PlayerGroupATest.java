@@ -2,7 +2,7 @@ package biljard.grbk.elnes.rating;
 
 
 import biljard.grbk.elnes.rating.player.Player;
-import biljard.grbk.elnes.rating.player.Rating;
+import biljard.grbk.elnes.rating.rating.Rating;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
