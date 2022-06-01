@@ -1,5 +1,6 @@
 package biljard.grbk.elnes.rating.player;
 
+import biljard.grbk.elnes.rating.rating.PlayerRatingHistory;
 import biljard.grbk.elnes.rating.rating.Rating;
 import biljard.grbk.elnes.rating.rating.RatingFactory;
 
@@ -11,6 +12,7 @@ public class Player {
   private Rating rating;
   private int cueScoreID;
   private PlayerGroup group;
+  private PlayerRatingHistory ratingHistory;
 
   /**
    * Constructor for the class Player.
@@ -25,6 +27,7 @@ public class Player {
     this.group = selectGroup(rating.getRating());
     this.rating = RatingFactory.createRatingInstance(this.group, rating.getRating());
     this.cueScoreID = cueScoreID;
+    ratingHistory = new PlayerRatingHistory(rating, cueScoreID);
     System.out.println("of type: " );
   }
 
@@ -80,7 +83,7 @@ public class Player {
     } else {
       rating.setRating(newRatingNumber, LocalDate.now());
     }
-
+    ratingHistory.addHistoryEntry(rating);
   }
 
 }
