@@ -3,11 +3,13 @@ package biljard.grbk.elnes.rating.player;
 import biljard.grbk.elnes.rating.rating.Rating;
 import biljard.grbk.elnes.rating.rating.RatingFactory;
 
+import java.time.LocalDate;
+
 public class Player {
   private String firstName;
   private String lastName;
   private Rating rating;
-  private String cuescoreID;
+  private int cueScoreID;
   private PlayerGroup group;
 
   /**
@@ -17,11 +19,12 @@ public class Player {
    * @param lastName  The player's last name.
    * @param rating    The player's rating.
    */
-  public Player(String firstName, String lastName, Rating rating) {
+  public Player(String firstName, String lastName, Rating rating, int cueScoreID) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.group = selectGroup(rating.getRating());
     this.rating = RatingFactory.createRatingInstance(this.group, rating.getRating());
+    this.cueScoreID = cueScoreID;
     System.out.println("of type: " );
   }
 
@@ -52,6 +55,14 @@ public class Player {
     return PlayerGroup.A;
   }
 
+  private void setRating(Rating rating) {
+    this.rating = rating;
+  }
+
+  private void setGroup(PlayerGroup group) {
+    this.group = group;
+  }
+
   public Rating getRating() {
     return rating;
   }
@@ -60,7 +71,15 @@ public class Player {
     return group;
   }
 
-  public void changeRating(){
+  public void changeRating(boolean win, Rating opponentRating){
+    int newRatingNumber = rating.getRating() + rating.getRatingChange(win, opponentRating);
+    if (selectGroup(newRatingNumber) != getGroup()) {
+      setRating(RatingFactory
+              .createRatingInstance(selectGroup(newRatingNumber), newRatingNumber));
+      setGroup(selectGroup(newRatingNumber));
+    } else {
+      rating.setRating(newRatingNumber, LocalDate.now());
+    }
 
   }
 
