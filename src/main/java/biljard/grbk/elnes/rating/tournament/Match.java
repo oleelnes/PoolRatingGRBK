@@ -17,6 +17,8 @@ public class Match {
   private int player2Score;
   private int distance;
   private MatchStatus status;
+  private Player winner;
+  private Player loser;
 
   public Match(Player player1, Player player2, int distance, boolean handicap) {
     this.player1 = player1;
@@ -39,7 +41,14 @@ public class Match {
   }
 
   public void endMatch(Player winner) {
-
+    //compare cuescore ID instead of instance because instance might be changed since the player was set.
+    if (winner.getCueScoreID() == player1.getCueScoreID()) {
+      this.winner = player1;
+      this.loser = player2;
+    } else {
+      this.winner = player2;
+      this.loser = player1;
+    }
   }
 
   public void updateMatch(int player1Score, int player2Score, boolean autoEnd) {
@@ -65,6 +74,14 @@ public class Match {
 
   public int getDistance(){
     return distance;
+  }
+
+  public Player getWinner(){
+    return winner; //can be null -- maybe throw error if null to better handle it?
+  }
+
+  public Player getLoser(){
+    return loser; //can be null -- maybe throw error if null to better handle it?
   }
 
 }
