@@ -2,12 +2,10 @@ package biljard.grbk.elnes.rating;
 
 
 import biljard.grbk.elnes.rating.player.Player;
-import biljard.grbk.elnes.rating.rating.Rating;
-import biljard.grbk.elnes.rating.rating.RatingFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PlayerGroupATest {
+public class PlayerTest {
   Player player;
   Player player2;
 
