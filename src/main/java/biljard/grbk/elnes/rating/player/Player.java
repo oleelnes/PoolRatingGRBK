@@ -17,18 +17,18 @@ public class Player {
   /**
    * Constructor for the class Player.
    *
-   * @param firstName The player's name.
-   * @param lastName  The player's last name.
-   * @param rating    The player's rating.
+   * @param firstName       The player's name.
+   * @param lastName        The player's last name.
+   * @param ratingNumber    The player's rating.
    */
-  public Player(String firstName, String lastName, Rating rating, int cueScoreID) {
+  public Player(String firstName, String lastName, int ratingNumber, int cueScoreID) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.group = selectGroup(rating.getRating());
-    this.rating = RatingFactory.createRatingInstance(this.group, rating.getRating());
+    this.group = selectGroup(ratingNumber);
+    this.rating = RatingFactory.createRatingInstance(this.group, ratingNumber);
     this.cueScoreID = cueScoreID;
     ratingHistory = new PlayerRatingHistory(rating, cueScoreID);
-    System.out.println("of type: " );
+    //System.out.println("of type: " );
   }
 
   /**
@@ -58,6 +58,26 @@ public class Player {
     return PlayerGroup.A;
   }
 
+  /**
+   * This method changes the rating of the player. It also changes the player's group
+   * if the changed rating requires that.
+   *
+   * @param win             Whether the player won the match.
+   * @param opponentRating  The rating of the opponent.
+   */
+  public void changeRating(boolean win, Rating opponentRating){
+    int newRatingNumber = rating.getRating() + rating.getRatingChange(win, opponentRating);
+    //inputs old rating as an entry in ratingHistory (if-statement might be redundant here, but I'll leave it for now)
+    if (newRatingNumber != rating.getRating()) ratingHistory.addHistoryEntry(rating);
+    if (selectGroup(newRatingNumber) != getGroup()) {
+      setRating(RatingFactory
+          .createRatingInstance(selectGroup(newRatingNumber), newRatingNumber));
+      setGroup(selectGroup(newRatingNumber));
+    } else {
+      rating.setRating(newRatingNumber, LocalDate.now());
+    }
+  }
+
   private void setRating(Rating rating) {
     this.rating = rating;
   }
@@ -70,20 +90,12 @@ public class Player {
     return rating;
   }
 
-  public PlayerGroup getGroup() {
-    return group;
+  public int getRatingNumber(){
+    return rating.getRating();
   }
 
-  public void changeRating(boolean win, Rating opponentRating){
-    int newRatingNumber = rating.getRating() + rating.getRatingChange(win, opponentRating);
-    if (selectGroup(newRatingNumber) != getGroup()) {
-      setRating(RatingFactory
-              .createRatingInstance(selectGroup(newRatingNumber), newRatingNumber));
-      setGroup(selectGroup(newRatingNumber));
-    } else {
-      rating.setRating(newRatingNumber, LocalDate.now());
-    }
-    ratingHistory.addHistoryEntry(rating);
+  public PlayerGroup getGroup() {
+    return group;
   }
 
 }
