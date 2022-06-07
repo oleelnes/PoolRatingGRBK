@@ -94,6 +94,10 @@ public class Player {
     return rating.getRating();
   }
 
+  public int getCueScoreID() {
+    return cueScoreID;
+  }
+
   public PlayerGroup getGroup() {
     return group;
   }
