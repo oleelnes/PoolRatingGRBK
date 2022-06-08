@@ -35,6 +35,9 @@ public class Handicap {
     }
     int ratingDifference = highestRating - lowestRating;
 
+    //Return an empty list if rating of the highest rated player is below 0 ... something strange has happened.
+    if (highestRating < 0) return Collections.emptyList();
+
     //Delegates calculation to a specific method depending on what the rating of the highest rated player is.
     if (highestRating >= 95) {
       handicapP1Strongest = handicapClassA(ratingDifference);
