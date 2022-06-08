@@ -2,7 +2,6 @@ package biljard.grbk.elnes.rating.handlers;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -33,10 +32,7 @@ public class CueScoreHandler {
         array.add(obj);
         System.out.println(array);
 
-
-        //tournamentArray.forEach(emp -> parse);
-        //System.out.println(tournamentArray);
-        parseTournament(obj);
+        printMatches(obj);
 
       }
     } catch(java.net.MalformedURLException malformedURLException) {
@@ -49,7 +45,7 @@ public class CueScoreHandler {
 
   }
 
-  private static void parseTournament(Object tournament) {
+  private static void printMatches(Object tournament) {
     JSONObject tournamentJSON = (JSONObject) tournament;
     JSONArray array = new JSONArray();
     array.addAll((Collection) tournamentJSON.get("matches"));
@@ -61,15 +57,5 @@ public class CueScoreHandler {
           + match.get("matchstatus") + "\n" + playerA.get("name") + "\n" + match.get("scoreA")
           + "\n" + match.get("scoreB") + "\n" + playerB.get("name") + "\n");
     }
-
-    //System.out.println(matchesObject);
-    //matchesObject.forEach(match -> System.out.println(matchesObject.get("playerA\n"
-        //+ matchesObject.get("scoreA\n") + matchesObject.get("scoreB\n") + matchesObject.get("playerB")) ));
-    /*for(Iterator iterator = matchesObject.keySet().iterator(); iterator.hasNext();) {
-      System.out.println(matchesObject.get("playerA\n"
-          + matchesObject.get("scoreA\n") + matchesObject.get("scoreB\n") + matchesObject.get("playerB")));
-      iterator.next();
-    }*/
   }
-
 }
