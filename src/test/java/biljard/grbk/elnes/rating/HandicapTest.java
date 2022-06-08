@@ -41,5 +41,28 @@ public class HandicapTest {
     assertEquals(handicapActual, handicap);
   }
 
+  @Test
+  public void match120vs20(){
+    handicap = Handicap.calculateHandicap(playerRating120, playerRating20);
+    int rating1 = playerRating120.getRatingNumber();
+    int rating2 = playerRating20.getRatingNumber();
+    System.out.println("player 1 (" + rating1 + ") " + handicap.get(0) + " (" + handicap.get(2) + ") "
+        + handicap.get(1) + " player 2 (" + rating2 +")");
+    List<Integer> handicapActual = new ArrayList<>();
+    Collections.addAll(handicapActual, 0, 6, 8);
+    assertEquals(handicapActual, handicap);
+  }
+
+  @Test
+  public void match20vs120(){
+    handicap = Handicap.calculateHandicap(playerRating20, playerRating120);
+    int rating1 = playerRating20.getRatingNumber();
+    int rating2 = playerRating120.getRatingNumber();
+    System.out.println("player 1 (" + rating1 + ") " + handicap.get(0) + " (" + handicap.get(2) + ") "
+        + handicap.get(1) + " player 2 (" + rating2 +")");
+    List<Integer> handicapActual = new ArrayList<>();
+    Collections.addAll(handicapActual, 6, 0, 8);
+    assertEquals(handicapActual, handicap);
+  }
 
 }
